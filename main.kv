@@ -1,0 +1,156 @@
+
+<Content>
+    orientation: "horizontal"
+    spacing: "12dp"
+    size_hint_y: None
+
+    MDRaisedButton:
+        text: "X"
+        md_bg_color: 1, 0, 1, 1
+        size_hint_y: 0.8
+        size_hint_x: 0.4
+        on_press: app.save_slaction('X')
+
+    MDRaisedButton:
+        text: "O"
+        md_bg_color: 1, 0, 1, 1
+        size_hint_y: 0.8
+        size_hint_x: 0.4
+        on_press: app.save_slaction('O')
+
+<CustomSnackbar>
+
+    MDIconButton:
+        pos_hint: {'center_y': .5}
+        icon: root.icon
+        opposite_colors: True
+
+    MDLabel:
+        id: text_bar
+        size_hint_y: None
+        height: self.texture_size[1]
+        text: root.text
+        font_size: root.font_size
+        theme_text_color: 'Custom'
+        text_color: get_color_from_hex('ffffff')
+        shorten: True
+        shorten_from: 'right'
+        pos_hint: {'center_y': .5}
+
+
+MDFloatLayout:
+    orientation: "vertical"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        MDBoxLayout:
+            size_hint_y: .1
+            MDBoxLayout:
+                id: titel
+                orientation: "vertical"
+                pos_hint: {'x':1,'top':1}
+                size_hint: .5,None
+                size: (0,40)
+
+                MDLabel:
+                    id: Player_count
+                    text: '/0'
+                    canvas.before:
+                        Color:
+                            rgba: 0,0,1,.9
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                
+                MDLabel:
+                    id: computer_count
+                    text: '/0'
+                    canvas.before:
+                        Color:
+                            rgba: 1,0,0,.9
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+            MDIconButton:
+                pos_hint: {'center_x':.5,'center_y':.5}
+                icon: 'refresh'
+                on_press: app.cleare(root,'Mach')
+            
+        MDGridLayout:
+            id: main_play
+            cols: 3
+            rows: 3
+
+            size_hint_x: 1
+            size_hint_y: .5
+
+            pos_hint: {'y':0.25}
+
+            MDRectangleFlatButton:
+                id: button1
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button2
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button3
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button4
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button5
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button6
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button7
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button8
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+            MDRectangleFlatButton:
+                id: button9
+                text: ''
+                font_size: 50
+                size_hint_x: 0.33
+                size_hint_y: 0.33
+                on_release: app.pressed(self)
+        MDBoxLayout:
+            size_hint_y: .1
+        
