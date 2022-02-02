@@ -1,19 +1,19 @@
-from logging import root
-import random
-from re import S
+
 from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.button import MDFlatButton
-from kivy.uix.boxlayout import BoxLayout
-
-from kivy.properties import StringProperty, NumericProperty
-from kivy.metrics import dp
-from kivy.core.window import Window
-from kivymd.uix.snackbar import Snackbar
-from kivy.lang import Builder
 from kivymd.uix.snackbar import BaseSnackbar
 from kivymd.uix.label import MDLabel
+from kivymd.uix.snackbar import Snackbar
+
+from kivy.properties import StringProperty, NumericProperty
+from kivy.uix.boxlayout import BoxLayout
+from kivy.metrics import dp
+from kivy.core.window import Window
+from kivy.lang import Builder
+
+import random
 
 
 class Content(BoxLayout):
