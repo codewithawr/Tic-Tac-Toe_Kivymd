@@ -1,4 +1,4 @@
-
+from __future__ import barry_as_FLUFL
 from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.floatlayout import MDFloatLayout
@@ -71,10 +71,36 @@ class main_app(MDApp):
         except:
             pass
         if for_ == 'Mach':
+            self.round_count = 1
+            all_butns = self.root.ids.main_play.children
+            
+            self.ttt_buttons = []
+            self.ttt_buttons_taken = []
+            
+            for i in range(len(all_butns)):
+                self.ttt_buttons.append(all_butns[-i-1])
+                self.ttt_buttons_taken.append(all_butns[-i-1])
+
+            if self.player_velu > self.computer_velu:
+                who_won = f'YOU({self.player_choise})'
+
+            elif self.computer_velu > self.player_velu:
+                who_won = self.computer_choise
+            
+            elif self.computer_velu == self.player_velu:
+                who_won = 'no one'
+            
+            if self.dialog:
+                self.dialog = MDDialog(
+                    title=f"{who_won} won the match Chose your Simbol for next:",
+                    type="custom",
+                    content_cls=Content()
+                )
+            self.dialog.open()
+
             self.player_velu = 0
             self.computer_velu = 0
-            self.round_count = 1
-            self.on_start()
+
 
         for i in self.ttt_buttons:
             i.text = ''
@@ -91,7 +117,6 @@ class main_app(MDApp):
 
     def check_lind(self):
         def win(who):
-            print(who)
             if who == self.player_choise:
                 self.player_velu = self.player_velu+1
                 self.root.ids.Player_count.text = self.player_choise+'/'+str(self.player_velu)
@@ -129,8 +154,6 @@ class main_app(MDApp):
 
             self.round_count = self.round_count+1
             
-            
-
 
 
         for i in range(len(self.ttt_buttons_taken)):
@@ -176,6 +199,8 @@ class main_app(MDApp):
                 if self.ttt_buttons_taken[i] == self.ttt_buttons_taken[i+1] and self.ttt_buttons_taken[i] == self.ttt_buttons_taken[i+2]:
                     win(self.ttt_buttons_taken[i])
                     return True
+
+
         return False
 
     def pressed(self,button):
@@ -189,6 +214,246 @@ class main_app(MDApp):
                     self.computer_tern()
 
     def computer_tern(self):
+        
+        for k,j in enumerate(self.ttt_buttons_taken):
+            if k == 0:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+1] and self.ttt_buttons[k+2].text == '':
+                    self.ttt_buttons[k+2].text = self.computer_choise
+                    self.ttt_buttons_taken[k+2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+2] and self.ttt_buttons[k+1].text == '':
+                    self.ttt_buttons[k+1].text = self.computer_choise
+                    self.ttt_buttons_taken[k+1] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+3] and self.ttt_buttons[k+6].text == '':
+                    self.ttt_buttons[k+6].text = self.computer_choise
+                    self.ttt_buttons_taken[k+6] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+6] and self.ttt_buttons[k+3].text == '':
+                    self.ttt_buttons[k+3].text = self.computer_choise
+                    self.ttt_buttons_taken[k+3] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+4] and self.ttt_buttons[k+8].text == '':
+                    self.ttt_buttons[k+8].text = self.computer_choise
+                    self.ttt_buttons_taken[k+8] = self.computer_choise
+                    return
+                
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+8] and self.ttt_buttons[k+4].text == '':
+                    self.ttt_buttons[k+4].text = self.computer_choise
+                    self.ttt_buttons_taken[k+4] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+            elif k == 1:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+3] and self.ttt_buttons[k+6].text == '':
+                    self.ttt_buttons[k+6].text = self.computer_choise
+                    self.ttt_buttons_taken[k+6] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+6] and self.ttt_buttons[k+3].text == '':
+                    self.ttt_buttons[k+3].text = self.computer_choise
+                    self.ttt_buttons_taken[k+3] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+
+            elif k == 2:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-1] and self.ttt_buttons[k-2].text == '':
+                    self.ttt_buttons[k-2].text = self.computer_choise
+                    self.ttt_buttons_taken[k-2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-2] and self.ttt_buttons[k-1].text == '':
+                    self.ttt_buttons[k-1].text = self.computer_choise
+                    self.ttt_buttons_taken[k-1] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+2] and self.ttt_buttons[k+4].text == '':
+                    self.ttt_buttons[k+4].text = self.computer_choise
+                    self.ttt_buttons_taken[k+4] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+4] and self.ttt_buttons[k+2].text == '':
+                    self.ttt_buttons[k+2].text = self.computer_choise
+                    self.ttt_buttons_taken[k+2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+3] and self.ttt_buttons[k+6].text == '':
+                    self.ttt_buttons[k+6].text = self.computer_choise
+                    self.ttt_buttons_taken[k+6] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+                
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+6] and self.ttt_buttons[k+3].text == '':
+                    self.ttt_buttons[k+3].text = self.computer_choise
+                    self.ttt_buttons_taken[k+3] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+            elif k == 3:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+1] and self.ttt_buttons[k+2].text == '':
+                    self.ttt_buttons[k+2].text = self.computer_choise
+                    self.ttt_buttons_taken[k+2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+2] and self.ttt_buttons[k+1].text == '':
+                    self.ttt_buttons[k+1].text = self.computer_choise
+                    self.ttt_buttons_taken[k+1] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+            elif k == 5:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-1] and self.ttt_buttons[k-2].text == '':
+                    self.ttt_buttons[k-2].text = self.computer_choise
+                    self.ttt_buttons_taken[k-2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-2] and self.ttt_buttons[k-1].text == '':
+                    self.ttt_buttons[k-1].text = self.computer_choise
+                    self.ttt_buttons_taken[k-1] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+            elif k == 6:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-3] and self.ttt_buttons[k-6].text == '':
+                    self.ttt_buttons[k-6].text = self.computer_choise
+                    self.ttt_buttons_taken[k-6] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-6] and self.ttt_buttons[k-3].text == '':
+                    self.ttt_buttons[k-3].text = self.computer_choise
+                    self.ttt_buttons_taken[k-3] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-2] and self.ttt_buttons[k-4].text == '':
+                    self.ttt_buttons[k-4].text = self.computer_choise
+                    self.ttt_buttons_taken[k-4] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-4] and self.ttt_buttons[k-2].text == '':
+                    self.ttt_buttons[k-2].text = self.computer_choise
+                    self.ttt_buttons_taken[k-2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+1] and self.ttt_buttons[k+2].text == '':
+                    self.ttt_buttons[k+2].text = self.computer_choise
+                    self.ttt_buttons_taken[k+2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+                
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k+2] and self.ttt_buttons[k+1].text == '':
+                    self.ttt_buttons[k+1].text = self.computer_choise
+                    self.ttt_buttons_taken[k+1] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+            elif k == 7:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-3] and self.ttt_buttons[k-6].text == '':
+                    self.ttt_buttons[k-6].text = self.computer_choise
+                    self.ttt_buttons_taken[k-6] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-6] and self.ttt_buttons[k-3].text == '':
+                    self.ttt_buttons[k-3].text = self.computer_choise
+                    self.ttt_buttons_taken[k-3] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+            elif k == 8:
+                if self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-3] and self.ttt_buttons[k-6].text == '':
+                    self.ttt_buttons[k-6].text = self.computer_choise
+                    self.ttt_buttons_taken[k-6] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-6] and self.ttt_buttons[k-3].text == '':
+                    self.ttt_buttons[k-3].text = self.computer_choise
+                    self.ttt_buttons_taken[k-3] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-4] and self.ttt_buttons[k-8].text == '':
+                    self.ttt_buttons[k-8].text = self.computer_choise
+                    self.ttt_buttons_taken[k-8] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+            
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-8] and self.ttt_buttons[k-4].text == '':
+                    self.ttt_buttons[k-4].text = self.computer_choise
+                    self.ttt_buttons_taken[k-4] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+
+
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-1] and self.ttt_buttons[k-2].text == '':
+                    self.ttt_buttons[k-2].text = self.computer_choise
+                    self.ttt_buttons_taken[k-2] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+                
+                elif self.ttt_buttons_taken[k] == self.ttt_buttons_taken[k-2] and self.ttt_buttons[k-1].text == '':
+                    self.ttt_buttons[k-1].text = self.computer_choise
+                    self.ttt_buttons_taken[k-1] = self.computer_choise
+                    self.check_lind()
+                    return
+                    
+
         for i in range(8):
             h = random.choice(self.ttt_buttons_taken)
             if h != self.computer_choise and h != self.player_choise:
@@ -198,6 +463,6 @@ class main_app(MDApp):
                         self.ttt_buttons_taken[i] = self.computer_choise
                 
                 self.check_lind()
-                break
+                return
 
 main_app().run()
