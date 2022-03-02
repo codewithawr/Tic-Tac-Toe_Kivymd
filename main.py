@@ -1,4 +1,5 @@
 from __future__ import barry_as_FLUFL
+from pickle import TRUE
 from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.floatlayout import MDFloatLayout
@@ -66,10 +67,7 @@ class main_app(MDApp):
     
 
     def cleare(self, obj, for_):
-        try:
-            self.snackbar.dismiss()
-        except:
-            pass
+        self.snackbar.dismiss()
         if for_ == 'Mach':
             self.round_count = 1
             all_butns = self.root.ids.main_play.children
@@ -116,44 +114,49 @@ class main_app(MDApp):
 
 
     def check_lind(self):
+        self.k=0
         def win(who):
-            if who == self.player_choise:
-                self.player_velu = self.player_velu+1
-                self.root.ids.Player_count.text = self.player_choise+'/'+str(self.player_velu)
-            elif who == self.computer_choise:
-                self.computer_velu = self.computer_velu+1
-                self.root.ids.computer_count.text = self.computer_choise+'/'+str(self.computer_velu)
-            
-            if self.round_count <= 2:
-                self.snackbar = CustomSnackbar(
-                    text=f"{who} was Win",
-                    icon="information",
-                    snackbar_x="10dp",
-                    snackbar_y="10dp",
-                    
-                    buttons=[MDFlatButton(text="Next Round", text_color=(1, 1, 1, 1), on_release = lambda x: self.cleare(x, 'Round'))]
-                )
-                self.snackbar.size_hint_x = (
-                    Window.width - (self.snackbar.snackbar_x * 2)
-                ) / Window.width
-                self.snackbar.open()
+            self.k=self.k+1
+            if self.k == 1:
+                if who == self.player_choise:
+                    self.player_velu = self.player_velu+1
+                    self.root.ids.Player_count.text = self.player_choise+'/'+str(self.player_velu)
+                elif who == self.computer_choise:
+                    self.computer_velu = self.computer_velu+1
+                    self.root.ids.computer_count.text = self.computer_choise+'/'+str(self.computer_velu)
+                
+                if self.round_count <= 2:
+                    self.snackbar = CustomSnackbar(
+                        text=f"{who} was Won",
+                        icon="information",
+                        snackbar_x="10dp",
+                        snackbar_y="10dp",
+                        auto_dismiss=False,
+                        
+                        buttons=[MDFlatButton(text="Next Round", text_color=(1, 1, 1, 1), on_release = lambda x: self.cleare(x, 'Round'))]
+                    )
+                    self.snackbar.size_hint_x = (
+                        Window.width - (self.snackbar.snackbar_x * 2)
+                    ) / Window.width
+                    self.snackbar.open()
 
-            elif self.round_count == 3:
-                self.snackbar = CustomSnackbar(
-                    text=f"{who} was Win for next match",
-                    icon="information",
-                    snackbar_x="10dp",
-                    snackbar_y="10dp",
-                    
-                    buttons=[MDFlatButton(text="Next Mach", text_color=(1, 1, 1, 1), on_release = lambda x: self.cleare(x, 'Mach'))]
-                )
-                self.snackbar.size_hint_x = (
-                    Window.width - (self.snackbar.snackbar_x * 2)
-                ) / Window.width
-                self.snackbar.open()
+                elif self.round_count == 3:
+                    self.snackbar = CustomSnackbar(
+                        text=f"{who} was Won for next match",
+                        icon="information",
+                        snackbar_x="10dp",
+                        snackbar_y="10dp",
+                        auto_dismiss=False,
+                        
+                        buttons=[MDFlatButton(text="Next Mach", text_color=(1, 1, 1, 1), on_release = lambda x: self.cleare(x, 'Mach'))]
+                    )
+                    self.snackbar.size_hint_x = (
+                        Window.width - (self.snackbar.snackbar_x * 2)
+                    ) / Window.width
+                    self.snackbar.open()
 
-            self.round_count = self.round_count+1
-            
+                self.round_count = self.round_count+1
+                
 
 
         for i in range(len(self.ttt_buttons_taken)):
@@ -200,6 +203,13 @@ class main_app(MDApp):
                     win(self.ttt_buttons_taken[i])
                     return True
 
+            else:
+                uko=[]
+                for j in self.ttt_buttons_taken:
+                    if j == self.computer_choise or j == self.player_choise:
+                        uko.append(True)
+                if len(uko) >=9:
+                    win("no one")
 
         return False
 
