@@ -1,5 +1,4 @@
-from __future__ import barry_as_FLUFL
-from pickle import TRUE
+
 from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.floatlayout import MDFloatLayout
@@ -54,6 +53,8 @@ class main_app(MDApp):
                 content_cls=Content()
             )
         self.dialog.open()
+        self.root.ids.Player_count.font_style = "H4"
+        self.root.ids.computer_count.font_style = "H4"
 
     def save_slaction(self, choise):
         self.option = ['X','O']
@@ -132,14 +133,13 @@ class main_app(MDApp):
                         snackbar_x="10dp",
                         snackbar_y="10dp",
                         auto_dismiss=False,
-                        
+                        bg_color=(0, 0, 1, .8),
                         buttons=[MDFlatButton(text="Next Round", text_color=(1, 1, 1, 1), on_release = lambda x: self.cleare(x, 'Round'))]
                     )
                     self.snackbar.size_hint_x = (
                         Window.width - (self.snackbar.snackbar_x * 2)
                     ) / Window.width
                     self.snackbar.open()
-
                 elif self.round_count == 3:
                     self.snackbar = CustomSnackbar(
                         text=f"{who} was Won for next match",
@@ -147,7 +147,7 @@ class main_app(MDApp):
                         snackbar_x="10dp",
                         snackbar_y="10dp",
                         auto_dismiss=False,
-                        
+                        bg_color=(0, 0, 1, .8),
                         buttons=[MDFlatButton(text="Next Mach", text_color=(1, 1, 1, 1), on_release = lambda x: self.cleare(x, 'Mach'))]
                     )
                     self.snackbar.size_hint_x = (
