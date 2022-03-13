@@ -7,14 +7,14 @@
     MDRaisedButton:
         text: "X"
         md_bg_color: 1, 0, 1, 1
-        size_hint_y: 0.8
+        size_hint_y: 1
         size_hint_x: 0.4
         on_press: app.save_slaction('X')
 
     MDRaisedButton:
         text: "O"
         md_bg_color: 1, 0, 1, 1
-        size_hint_y: 0.8
+        size_hint_y: 1
         size_hint_x: 0.4
         on_press: app.save_slaction('O')
 
@@ -32,7 +32,7 @@
         text: root.text
         font_size: root.font_size
         theme_text_color: 'Custom'
-        text_color: get_color_from_hex('ffffff')
+        text_color: 1,1,1
         shorten: True
         shorten_from: 'right'
         pos_hint: {'center_y': .5}
@@ -50,7 +50,7 @@ MDFloatLayout:
                 orientation: "vertical"
                 pos_hint: {'x':1,'top':1}
                 size_hint: .5,None
-                size: (0,40)
+                size: (0,80)
 
                 MDLabel:
                     id: Player_count
